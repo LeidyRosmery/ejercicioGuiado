@@ -3,33 +3,35 @@ var select = document.getElementById("seleccionar");
 
 
 select.onchange = function() {
-    if (select.value == "sepia") {
-        for (var i = 0; i < img.length; i++) {
-            img[i].classList.add("sepia");
-            img[i].classList.remove("blanco-negro");
-            img[i].classList.remove("invertir-colores");
-        }
-    }
-    if (select.value == "invertir-colores") {
-        for (var i = 0; i < img.length; i++) {
-            img[i].classList.remove("blanco-negro");
-            img[i].classList.add("invertir-colores");
-            img[i].classList.remove("sepia");
-        }
-    }
-    if (select.value == "blanco-negro") {
-        for (var i = 0; i < img.length; i++) {
-            img[i].classList.add("blanco-negro");
-            img[i].classList.remove("invertir-colores");
-            img[i].classList.remove("sepia");
-        }
-    }
-    if (select.value == "original") {
-        for (var i = 0; i < img.length; i++) {
-            img[i].classList.remove("blanco-negro");
-            img[i].classList.remove("invertir-colores");
-            img[i].classList.remove("sepia");
-        }
-    }
+    expression = select.value;
+    switch (expression) {
 
+        case "sepia":
+            classes("sepia", "blanco-negro", "invertir-colores");
+            break;
+
+        case "invertir-colores":
+            classes("invertir-colores", "blanco-negro", "sepia");
+            break;
+
+
+        case "blanco-negro":
+            classes("blanco-negro", "invertir-colores", "sepia");
+            break;
+        default:
+            for (var i = 0; i < img.length; i++) {
+                img[i].classList.remove("blanco-negro");
+                img[i].classList.remove("invertir-colores");
+                img[i].classList.remove("sepia");
+            }
+
+    }
+}
+//+++++++++++++++++++++++++++++++++++++++++++
+function classes(add, delet, delet2) {
+    for (var i = 0; i < img.length; i++) {
+        img[i].classList.add(add);
+        img[i].classList.remove(delet);
+        img[i].classList.remove(delet2);
+    }
 }
